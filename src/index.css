@@ -1,0 +1,89 @@
+@font-face {
+  font-family: "Alagard Medium";
+  src: url("./assets/fonts/alagard.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: "Alagard Medium", sans-serif;
+  background-color: #1b003f;
+  color: #e0e0e0;
+  line-height: 1.5;
+  -webkit-font-smoothing: none; /* pixelated look */
+  text-rendering: optimizeSpeed;
+}
+
+/* Headings */
+h1,
+h2,
+h3 {
+  font-family: "Alagard Medium", sans-serif;
+  color: #ffffff;
+  text-shadow: 2px 2px #3f007f; /* pixel effect */
+}
+
+/* Buttons */
+button,
+.btn {
+  background-color: #ff00ff;
+  color: #1b003f;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  border: 2px solid #7f00ff;
+  font-family: "Alagard Medium", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #7f00ff;
+  color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+/* Cards / panels */
+.card {
+  background-color: #3f007f;
+  border: 2px solid #7f00ff;
+  border-radius: 0;
+  padding: 1rem;
+  box-shadow: 4px 4px #000;
+  font-family: "Alagard Medium", sans-serif;
+}
+
+/* Inputs / dropdowns */
+input,
+select {
+  background-color: #1b003f;
+  color: #e0e0e0;
+  border: 2px solid #7f00ff;
+  padding: 0.4rem 0.6rem;
+  font-family: "Alagard Medium", sans-serif;
+  outline: none;
+  border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .wheel {
+    width: 250px;
+    height: 250px;
+  }
+
+  .btn {
+    padding: 0.4rem 0.8rem;
+  }
+}

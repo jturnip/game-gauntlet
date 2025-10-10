@@ -1,0 +1,35 @@
+.player-screen {
+  padding: 2rem 1rem;
+  background-color: #1b003f;
+  min-height: 100vh;
+  color: #e0e0e0;
+  font-family: "Alagard Medium", sans-serif;
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.player-header img {
+  width: 60px;
+  height: 60px;
+  margin-right: 1rem;
+  border: 2px solid #ff00ff;
+  box-shadow: 2px 2px #000;
+}
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.inventory-item {
+  background-color: #3f007f;
+  border: 2px solid #7f00ff;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 3px 3px #000;
+}

@@ -1,0 +1,83 @@
+/* Login screen wrapper */
+.login-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background-color: #1b003f; /* matches global bg */
+  text-align: center;
+}
+
+/* Logos */
+.logo {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto 2rem auto;
+  image-rendering: pixelated; /* enhances pixel look */
+  padding-top: 100px;
+}
+
+.desktop-logo {
+  display: block;
+}
+
+.mobile-logo {
+  display: none;
+}
+
+/* Show mobile logo on small screens */
+@media (max-width: 768px) {
+  .desktop-logo {
+    display: none;
+  }
+  .mobile-logo {
+    display: block;
+  }
+}
+
+/* Login form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 350px;
+  background-color: #3f007f;
+  border: 2px solid #7f00ff;
+  padding: 1.5rem;
+  box-shadow: 4px 4px #000;
+}
+
+/* Inputs */
+.login-form input,
+.login-form select {
+  background-color: #1b003f;
+  color: #e0e0e0;
+  border: 2px solid #7f00ff;
+  padding: 0.6rem;
+  font-family: "Alagard Medium", sans-serif;
+  outline: none;
+  border-radius: 0;
+  text-align: center;
+}
+
+/* Button */
+.login-form button {
+  background-color: #ff00ff;
+  color: #1b003f;
+  padding: 0.6rem;
+  border: 2px solid #7f00ff;
+  font-family: "Alagard Medium", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.login-form button:hover {
+  background-color: #7f00ff;
+  color: #e0e0e0;
+  transform: scale(1.05);
+}
