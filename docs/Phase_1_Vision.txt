@@ -1,0 +1,98 @@
+Game Gauntlet – Phase 1: Vision Document
+--------------------------------------------------
+
+1. Purpose
+-----------
+The Game Gauntlet is a platform designed to make game nights and tournaments more fun, cohesive, and competitive.
+It acts as the connective tissue between a variety of games — turning a series of otherwise unrelated games into a single, unified experience.
+
+The Game Gauntlet provides structure, progression, and excitement by layering themes, achievements, powerups, and point systems over any type of game — whether video games, board games, or physical activities.
+
+Core Idea:
+"The Game Gauntlet turns a night of random games into an epic multi-game tournament experience."
+
+--------------------------------------------------
+
+2. Target Users
+----------------
+Players:
+- Participate in games outside the app (board games, video games, etc.)
+- View available achievements, powerups, and leaderboards
+- Spin interactive wheels when prompted during gameplay
+- Use or purchase powerups during certain phases
+- Eventually view a live event screen or join online events
+
+Admins:
+- Create and manage Gauntlets (events)
+- Choose themes, games, point values, achievements, powerups, and wheel options
+- Run games, input results, and monitor logs
+- Manage rounds and player states throughout the event
+- In the future, collaborate with other admins or co-hosts
+- Manage automation for achievements and powerup usage where possible
+
+--------------------------------------------------
+
+3. Core Value
+--------------
+The Game Gauntlet is a new way to do a game night — adding structure, drama, and strategy to group gaming.
+
+It appeals to:
+- Groups of friends who love playing competitive games together
+- Gamers who enjoy systems, rewards, and leaderboards
+- Event hosts who want to make game nights exciting and replayable
+
+The app makes each event unique with customizable elements like themes, powerups, and wheels — ensuring no two Gauntlets are ever the same.
+
+Tagline-level summary:
+"Compete across games. Earn achievements. Spin the wheels of fate. Become the champion of the Gauntlet."
+
+--------------------------------------------------
+
+4. Core Event Flow
+-------------------
+1. Setup Phase (Admin):
+   - Admin schedules the event and creates a new Gauntlet.
+   - Players are invited and registered.
+   - Admin selects the theme, games, point structure, achievements, powerups, and wheel outcomes.
+
+2. Event Start:
+   - Admin introduces the Gauntlet and kicks off the first round.
+   - Players play the first game externally (e.g., Mario Kart, Codenames, etc.).
+
+3. Scoring Phase:
+   - Admin inputs placements or scores into the app.
+   - Points are automatically distributed based on the setup.
+
+4. Wheel Phase:
+   - A player is chosen to spin a wheel that determines a mini-game, challenge, or bonus.
+   - Winners or losers spin blessed or cursed wheels accordingly.
+
+5. Powerup & Shop Phase:
+   - Players can use powerups or buy new ones from the in-app store using points.
+
+6. Next Round Begins:
+   - Repeat until all scheduled games are complete.
+
+7. End Phase:
+   - App calculates totals and declares the overall Gauntlet Champion.
+   - Optional post-event results or recap screens can be shown.
+
+--------------------------------------------------
+
+5. Long-Term Vision (SaaS Future)
+----------------------------------
+The ultimate goal is to turn the Game Gauntlet into a SaaS platform where anyone can host their own Gauntlets.
+
+Public Version Goals:
+- Admins purchase a subscription or license to host Gauntlets.
+- Each admin’s data (themes, games, scores, etc.) is isolated from others (multi-tenancy).
+- Admins can create templates or share their setups publicly.
+- Players can join events for free by invitation link or code.
+- Future versions may support:
+  - Online play with live event screens
+  - Multiple admins per Gauntlet
+  - Automated scoring integrations
+  - Community achievements and powerup markets
+
+Core SaaS Vision:
+"A platform for friends, communities, and creators to build and run their own Game Gauntlets — customized tournaments that turn any collection of games into a unified, story-driven experience."
