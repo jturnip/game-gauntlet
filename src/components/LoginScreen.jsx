@@ -3,30 +3,30 @@ import { db } from "../firebaseConfig";
 import { collection, onSnapshot } from "firebase/firestore";
 import "../styles/LoginScreen.css";
 
-import desktopLogo from "../assets/GGDesktop.png";
-import mobileLogo from "../assets/GGMobile.png";
+import desktopLogo from "../assets/tusmtm_logo.png";
+import mobileLogo from "../assets/tusmtm_logo.png";
 
 // Import local images
-import BenPic from "../assets/avatars/ben.png";
-import ChasePic from "../assets/avatars/chase.png";
-import CynderPic from "../assets/avatars/cynder.png";
-import DrakePic from "../assets/avatars/drake.png";
-import JoshiePic from "../assets/avatars/joshie.png";
-import JoshuaPic from "../assets/avatars/joshua.png";
-import JustinPic from "../assets/avatars/justin.png";
-import KurtPic from "../assets/avatars/kurt.png";
+import BrysonPic from "../assets/avatars/bryson_head.png";
+import ConnerPic from "../assets/avatars/conner_head.png";
+import ElijahPic from "../assets/avatars/elijah_head.png";
+import DrakePic from "../assets/avatars/drake_head.png";
+import NatePic from "../assets/avatars/nate_head.png";
+import LincolnPic from "../assets/avatars/lincoln_head.png";
+import NathanPic from "../assets/avatars/nathan_head.png";
+import BennyPic from "../assets/avatars/benny_head.png";
 import AdminPic from "../assets/avatars/admin.jpg";
 
 // Map player IDs to images
 const avatarMap = {
-  ben: BenPic,
-  chase: ChasePic,
-  cynder: CynderPic,
+  bryson: BrysonPic,
+  conner: ConnerPic,
+  elijah: ElijahPic,
   drake: DrakePic,
-  joshie: JoshiePic,
-  joshua: JoshuaPic,
-  justin: JustinPic,
-  kurt: KurtPic,
+  nate: NatePic,
+  lincoln: LincolnPic,
+  nathan: NathanPic,
+  benny: BennyPic,
   admin: AdminPic,
 };
 
@@ -94,8 +94,8 @@ export function LoginScreen({ onLogin }) {
                 src={avatarMap[p.id] || avatarMap["admin"]}
                 alt={p.name}
                 style={{
-                  width: "40px",
-                  height: "40px",
+                  maxWidth: "40px",
+                  maxHeight: "40px",
                   borderRadius: "50%",
                   marginRight: "0.5rem",
                 }}

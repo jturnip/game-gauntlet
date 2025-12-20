@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GameLog from "./GameLog";
 import AchievementsTab from "./Achievements";
-
-import Wheel from "./Wheel";
 import { db } from "../firebaseConfig";
 import {
   collection,
@@ -11,32 +9,34 @@ import {
   updateDoc,
   setDoc,
   getDocs,
+  serverTimestamp,
+  increment,
+  arrayUnion,
 } from "firebase/firestore";
-import "../styles/MainScreen.css";
+import styles from "../styles/MainScreen.module.css";
 
 // Import all game icons
-import CornholeIcon from "../assets/games/cornhole.png";
-import GeoguesserIcon from "../assets/games/geoguessr.png";
+import SuperSmashBrosIcon from "../assets/games/super_smash_bros.png";
+import GangBeastsIcon from "../assets/games/gang_beasts.png";
 import MarioKartIcon from "../assets/games/mario_kart.png";
-import OvercookedIcon from "../assets/games/overcooked.png";
-import PongIcon from "../assets/games/pong.png";
+import WiiSportsBasketballIcon from "../assets/games/wii_sports_basketball.png";
+import SpoonsIcon from "../assets/games/spoons.png";
 import QuiplashIcon from "../assets/games/quiplash.png";
-import StickFightIcon from "../assets/games/stickfight.png";
-import ZonkIcon from "../assets/games/zonk.png";
+
 
 // Map game names to icons
 const gameIcons = {
-  Cornhole: CornholeIcon,
-  Geoguesser: GeoguesserIcon,
+  SuperSmashBros: SuperSmashBrosIcon,
+  GangBeasts: GangBeastsIcon,
   MarioKart: MarioKartIcon,
-  Overcooked: OvercookedIcon,
-  Pong: PongIcon,
+  Basketball: WiiSportsBasketballIcon,
+  Spoons: SpoonsIcon,
   Quiplash: QuiplashIcon,
-  StickFight: StickFightIcon,
-  Zonk: ZonkIcon,
 };
 
-import GameGauntletLogo from "../assets/GGDesktop.png";
+import GameGauntletLogo from "../assets/tusmtm_logo.png";
+import ShopTitle from "../assets/ItemShop.png";
+import LeaderboardTitle from "../assets/Leaderboard.png";
 
 // Import powerup icons
 import d_glasses from "../assets/powerUps/3d_glasses.png";
@@ -101,41 +101,26 @@ const powerUpImages = {
   the_wheel_of_wheels,
 };
 
-// Rendering Wheels
-
-const renderWheel = () => {
-  switch (selectedWheel) {
-    case "blessed":
-      return <BlessedWheel onFinish={handleWheelResult} />;
-    case "cursed":
-      return <CursedWheel onFinish={handleWheelResult} />;
-    case "chance":
-      return <ChanceWheel onFinish={handleWheelResult} />;
-    default:
-      return null;
-  }
-};
-
 // Player avatars
-import BenPic from "../assets/avatars/ben.png";
-import ChasePic from "../assets/avatars/chase.png";
-import CynderPic from "../assets/avatars/cynder.png";
-import DrakePic from "../assets/avatars/drake.png";
-import JoshiePic from "../assets/avatars/joshie.png";
-import JoshuaPic from "../assets/avatars/joshua.png";
-import JustinPic from "../assets/avatars/justin.png";
-import KurtPic from "../assets/avatars/kurt.png";
+import BrysonPic from "../assets/avatars/bryson_head.png";
+import ConnerPic from "../assets/avatars/conner_head.png";
+import ElijahPic from "../assets/avatars/elijah_head.png";
+import DrakePic from "../assets/avatars/drake_head.png";
+import NatePic from "../assets/avatars/nate_head.png";
+import LincolnPic from "../assets/avatars/lincoln_head.png";
+import NathanPic from "../assets/avatars/nathan_head.png";
+import BennyPic from "../assets/avatars/benny_head.png";
 import AdminPic from "../assets/avatars/admin.jpg";
 
 const avatarMap = {
-  ben: BenPic,
-  chase: ChasePic,
-  cynder: CynderPic,
+  bryson: BrysonPic,
+  conner: ConnerPic,
+  elijah: ElijahPic,
   drake: DrakePic,
-  joshie: JoshiePic,
-  joshua: JoshuaPic,
-  justin: JustinPic,
-  kurt: KurtPic,
+  nate: NatePic,
+  lincoln: LincolnPic,
+  nathan: NathanPic,
+  benny: BennyPic,
   admin: AdminPic,
 };
 
@@ -144,18 +129,6 @@ const data = [
   { option: "1", style: { backgroundColor: "white" } },
   { option: "2" },
 ];
-
-export default () => (
-  <>
-    <Wheel
-      mustStartSpinning={mustSpin}
-      prizeNumber={3}
-      data={data}
-      backgroundColors={["#3e3e3e", "#df3428"]}
-      textColors={["#ffffff"]}
-    />
-  </>
-);
 
 export function MainScreen() {
   const [players, setPlayers] = useState([]);
@@ -166,6 +139,10 @@ export function MainScreen() {
   const [powerUps, setPowerUps] = useState([]);
   const [currentStore, setCurrentStore] = useState([]);
   const [rolling, setRolling] = useState(false);
+  const [pointsToGive, setPointsToGive] = useState(0);
+  const [availablePowerUps, setAvailablePowerUps] = useState([]); // all power-ups in the store
+  const [availableAchievements, setAvailableAchievements] = useState([]);
+  const [selectedPowerUp, setSelectedPowerUp] = useState(null);
 
   // Firestore: Listen to players
   useEffect(() => {
@@ -206,17 +183,139 @@ export function MainScreen() {
 
   //points awarded for games
   const gamePoints = {
-    Cornhole: { 1: 7, 2: 4 },
-    Pong: { 1: 7, 2: 4 },
-    Overcooked: { 1: 8, 2: 6, 3: 5, 4: 3 },
-    MarioKart: { 1: 10, 2: 6, 3: 4, 4: 2 },
-    StickFight: { 1: 10, 2: 6, 3: 4, 4: 2 },
-    Jackbox: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
-    Zonk: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
-    Geoguesser: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
+    SuperSmashBros: { 1: 10, 2: 6, 3: 4 },
+    GangBeasts: { 1: 10, 2: 6, 3: 4 },
+    WiiSportsBasketball: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
+    Quiplash: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
+    Spoons: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
+    MarioKart: { 1: 10, 2: 6, 3: 4, 4: 2 }
   };
 
   const [results, setResults] = useState({}); // stores player placements
+
+  // admin panel stuff
+
+  useEffect(() => {
+    // Load players
+    const unsubPlayers = onSnapshot(collection(db, "players"), (snap) => {
+      const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      setPlayers(list);
+    });
+
+    // Load power-ups
+    const storeRef = doc(db, "currentStore", "active");
+    const unsubStore = onSnapshot(storeRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setAvailablePowerUps(docSnap.data().powerUps || []);
+      }
+    });
+
+    // Load achievements
+    const achievementsCol = collection(db, "achievements");
+    getDocs(achievementsCol).then((snap) => {
+      const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      setAvailableAchievements(list);
+    });
+
+    return () => {
+      unsubPlayers();
+      unsubStore();
+    };
+  }, []);
+
+  // Give points
+  const givePoints = async (playerId, points) => {
+    const playerRef = doc(db, "players", playerId);
+    await updateDoc(playerRef, { score: increment(points) });
+    console.log(`Gave ${points} points to ${playerId}`);
+  };
+
+  // Give specific power-up
+  const givePowerUp = async (playerId, powerUp) => {
+    if (!playerId || !powerUp) return;
+
+    const player = players.find((p) => p.id === playerId);
+    if (!player) return;
+
+    const inventory = player.inventory || [];
+
+    // Check if player already has 4 power-ups
+    if (inventory.length >= 4) {
+      alert(`${player.name} already has 4 power-ups! Cannot give more.`);
+      return;
+    }
+
+    const playerRef = doc(db, "players", playerId);
+    await updateDoc(playerRef, {
+      inventory: arrayUnion({
+        id: powerUp.id,
+        title: powerUp.title,
+        image: powerUp.id,
+        rarity: powerUp.rarity,
+        price: powerUp.price,
+        description: powerUp.description,
+      }),
+    });
+
+    console.log(`Gave power-up ${powerUp.title} to ${player.name}`);
+  };
+
+  // Give random power-up
+  // Give random power-up from complete list of all power-ups
+  // Give random power-up from complete list of all power-ups
+  const giveRandomPowerUp = async (playerId) => {
+    const player = players.find((p) => p.id === playerId);
+    if (!player) return;
+
+    const inventory = player.inventory || [];
+
+    // Check if inventory is full
+    if (inventory.length >= 4) {
+      alert(`${player.name} already has 4 power-ups and cannot receive more.`);
+      return;
+    }
+
+    if (!powerUps.length) return; // full list of power-ups
+
+    const randomIndex = Math.floor(Math.random() * powerUps.length);
+    const randomPU = powerUps[randomIndex];
+
+    await givePowerUp(playerId, {
+      id: randomPU.id,
+      title: randomPU.title,
+      image: randomPU.id,
+      rarity: randomPU.rarity,
+      price: randomPU.price,
+      description: randomPU.description,
+    });
+
+    console.log(`Gave random power-up ${randomPU.title} to ${playerId}`);
+  };
+
+  // Give random achievement
+  const giveRandomAchievement = async (playerId) => {
+    if (!availableAchievements.length) return;
+
+    // Filter achievements player already has
+    const player = players.find((p) => p.id === playerId);
+    const earned = player?.earnedAchievements || [];
+    const remaining = availableAchievements.filter(
+      (a) => !earned.includes(a.id)
+    );
+
+    if (!remaining.length) return alert("Player has all achievements!");
+
+    const randomIndex = Math.floor(Math.random() * remaining.length);
+    const achievement = remaining[randomIndex];
+
+    const playerRef = doc(db, "players", playerId);
+    await updateDoc(playerRef, {
+      earnedAchievements: arrayUnion(achievement.id),
+      score: increment(achievement.points || 0),
+    });
+
+    console.log(`Gave achievement ${achievement.title} to ${playerId}`);
+  };
 
   async function submitResults() {
     if (!currentGame) return;
@@ -240,8 +339,6 @@ export function MainScreen() {
         winner = player; // record 1st place player
       }
     }
-
-    // roll function
 
     // Takes an array of all power-ups from Firestore
     // Each power-up has a numeric "rarity" (higher = more common)
@@ -374,27 +471,36 @@ export function MainScreen() {
   }
 
   async function handleRollStore() {
-    if (powerUps.length === 0) return;
+    if (!powerUps || powerUps.length === 0) return;
     setRolling(true);
 
     try {
+      // Build the rolled array (create new objects to avoid referencing originals)
       const rolled = [];
       while (rolled.length < 3 && powerUps.length > 0) {
         const pick = weightedRandomPick(powerUps);
+        // ensure uniqueness in this roll
         if (!rolled.some((c) => c.id === pick.id)) {
-          rolled.push({ ...pick }); // <-- create a NEW object to avoid reference issues
+          rolled.push({ ...pick });
         }
       }
 
-      const storeRef = doc(db, "adminSettings", "currentStore");
+      // Immediately update local state so admin UI shows the roll without waiting for Firestore
+      setCurrentStore(rolled);
+
+      // Persist to Firestore at the doc your player-side listens to
+      // (player is listening to doc(db, "currentStore", "active"))
+      const storeRef = doc(db, "currentStore", "active");
       await setDoc(storeRef, {
+        rollId: `roll_${Date.now()}`,
+        timestamp: serverTimestamp(),
         powerUps: rolled,
-        timestamp: Date.now(),
       });
 
-      console.log("✅ Store rolled and saved:", rolled);
+      console.log("✅ Store rolled and saved to Firestore:", rolled);
     } catch (err) {
       console.error("Error rolling store:", err);
+      // Optionally revert local UI or show an error toast
     } finally {
       setRolling(false);
     }
@@ -423,27 +529,27 @@ export function MainScreen() {
   const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
 
   return (
-    <div className="container main-screen">
+    <div className={`${styles.container} ${styles.mainScreen}`}>
       {/* Tabs */}
-      <nav className="tab-nav">
-        {["admin", "leaderboard", "wheel", "store", "achievements"].map(
-          (tab) => (
-            <button
-              key={tab}
-              className={activeTab === tab ? "tab active" : "tab"}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          )
-        )}
+      <nav className={styles.tabNav}>
+        {["admin", "leaderboard", "store", "achievements"].map((tab) => (
+          <button
+            key={tab}
+            className={
+              activeTab === tab ? `${styles.tab} ${styles.active}` : styles.tab
+            }
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
       </nav>
 
       {/* Tab content */}
-      <div className="tab-content">
+      <div className={styles.tabContent}>
         {/* Admin Tab */}
         {activeTab === "admin" && (
-          <div className="card">
+          <div className={styles.card}>
             <h2>🛠 Admin Controls</h2>
 
             {/* Select Current Game */}
@@ -454,13 +560,11 @@ export function MainScreen() {
                 onChange={(e) => updateCurrentGame(e.target.value)}
               >
                 <option value="">-- Select Game --</option>
-                <option value="Cornhole">Cornhole</option>
-                <option value="Pong">Pong</option>
-                <option value="StickFight">Stick Fight</option>
-                <option value="Geoguesser">Geoguesser</option>
-                <option value="Overcooked">Overcooked 2</option>
+                <option value="SuperSmashBros">Super Smash Bros</option>
+                <option value="GangBeasts">Gang Beasts</option>
+                <option value="Basketball">Wii Sports Basketball</option>
                 <option value="Quiplash">Quiplash</option>
-                <option value="Zonk">Zonk</option>
+                <option value="Spoons">Spoons</option>
                 <option value="MarioKart">Mario Kart</option>
               </select>
             </div>
@@ -496,21 +600,114 @@ export function MainScreen() {
 
                 <button onClick={submitResults}>Submit Results</button>
                 <div></div>
+                <select onChange={(e) => setSelectedPlayer(e.target.value)}>
+                  <option value="">Select Player</option>
+                  {players.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </select>
+
+                <div className="points-input">
+                  <label>Adjust Points:</label>
+                  <input
+                    type="number"
+                    placeholder="Enter points (e.g. +5 or -3)"
+                    value={pointsToGive}
+                    onChange={(e) => setPointsToGive(Number(e.target.value))}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && selectedPlayer) {
+                        givePoints(selectedPlayer, pointsToGive);
+                        setPointsToGive(0); // reset input
+                      }
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      if (selectedPlayer) {
+                        givePoints(selectedPlayer, pointsToGive);
+                        setPointsToGive(0); // reset input
+                      }
+                    }}
+                  >
+                    Apply
+                  </button>
+                </div>
+
+                <div>
+                  <button onClick={() => giveRandomPowerUp(selectedPlayer)}>
+                    Give Random Power-Up
+                  </button>
+                  <button onClick={() => giveRandomAchievement(selectedPlayer)}>
+                    Give Random Achievement
+                  </button>
+                </div>
+
+                <div>
+                  <h3>Give Specific Power-Up</h3>
+                  <select
+                    value={selectedPowerUp?.id || ""}
+                    onChange={async (e) => {
+                      const puId = e.target.value;
+                      if (!puId || !selectedPlayer) return;
+
+                      const pu = powerUps.find((p) => p.id === puId);
+                      if (!pu) return;
+
+                      // Check if player has 4 power-ups
+                      const player = players.find(
+                        (p) => p.id === selectedPlayer
+                      );
+                      const inventory = player?.inventory || [];
+                      if (inventory.length >= 4) {
+                        alert(
+                          `${player.name} already has 4 power-ups and cannot receive more.`
+                        );
+                        return;
+                      }
+
+                      await givePowerUp(selectedPlayer, {
+                        id: pu.id,
+                        title: pu.title,
+                        image: pu.id,
+                        rarity: pu.rarity,
+                        price: pu.price,
+                        description: pu.description,
+                      });
+
+                      // Optional: clear selection after giving
+                      setSelectedPowerUp(null);
+                    }}
+                  >
+                    <option value="">-- Select Power-Up --</option>
+                    {powerUps.map((pu) => (
+                      <option key={pu.id} value={pu.id}>
+                        {pu.title} ({pu.rarity})
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             )}
           </div>
         )}
 
         {/* Leaderboard */}
+        {/* Leaderboard */}
         {activeTab === "leaderboard" && (
-          <div className="tab-content">
-            {/* Left: Leaderboard */}
-            <div className="leaderboard-container">
-              <h2>Leaderboard</h2>
-              <ol className="leaderboard">
-                {sortedPlayers.map((p, i) => (
+          <div className={styles.leaderboardRightContainer}>
+            <img
+              className={styles.shopTitle}
+              src={LeaderboardTitle}
+              alt="shop"
+            />
+            {/* Left: two-column leaderboard */}
+            <div className={styles.leaderboardLeft}>
+              {/* Column 1: places 1-4 */}
+              <ol className={styles.leaderboardColumnLeft}>
+                {sortedPlayers.slice(0, 4).map((p, i) => (
                   <li key={p.id}>
-                    {/* Place icon (replace with your own images if you want) */}
                     <img
                       src={
                         new URL(
@@ -519,75 +716,92 @@ export function MainScreen() {
                         ).href
                       }
                       alt={`${i + 1} place`}
-                      className="place-icon"
-                      onError={(e) => (e.currentTarget.style.display = "none")} // hides if no file
+                      className={styles.placeIcon}
+                      onError={(e) => (e.currentTarget.style.display = "none")}
                     />
-
-                    {/* Profile avatar */}
                     <img
                       src={avatarMap[p.id] || avatarMap["admin"]}
                       alt={p.name}
-                      className="player-avatar"
+                      className={styles.playerAvatar}
                     />
+                    <span className={styles.playerName}>{p.name}</span>
+                    <span className={styles.playerScore}>{p.score}</span>
+                  </li>
+                ))}
+              </ol>
 
-                    {/* Player name */}
-                    <span className="player-name">{p.name}</span>
-
-                    {/* Player score */}
-                    <span className="player-score">{p.score}</span>
+              {/* Column 2: places 5-8 */}
+              <ol className={styles.leaderboardColumnRight}>
+                {sortedPlayers.slice(4, 8).map((p, i) => (
+                  <li key={p.id}>
+                    <img
+                      src={
+                        new URL(
+                          `../assets/places/place-${i + 5}.png`,
+                          import.meta.url
+                        ).href
+                      }
+                      alt={`${i + 5} place`}
+                      className={styles.placeIcon}
+                      onError={(e) => (e.currentTarget.style.display = "none")}
+                    />
+                    <img
+                      src={avatarMap[p.id] || avatarMap["admin"]}
+                      alt={p.name}
+                      className={styles.playerAvatar}
+                    />
+                    <span className={styles.playerName}>{p.name}</span>
+                    <span className={styles.playerScore}>{p.score}</span>
                   </li>
                 ))}
               </ol>
             </div>
 
-            {/* Right: Log + Icon */}
-            <div className="game-log">
-              <h2>Current Game:</h2>
-
-              <img
-                src={gameIcons[currentGame] || null}
-                alt="Current Game"
-                style={{ width: "200px", height: "200px" }}
-              />
-              <GameLog />
+            {/* Right: current game + game log */}
+            <div className={styles.gameLogContainer}>
+              {currentGame && (
+                <>
+                  <h2 className={styles.currentGameTitle}>Current Game</h2>
+                  <img
+                    src={gameIcons[currentGame] || null}
+                    alt="Current Game"
+                    className={styles.currentGameIcon}
+                  />{" "}
+                  <h2 className={styles.currentGameTitle}>{currentGame}</h2>
+                </>
+              )}
             </div>
-          </div>
-        )}
-
-        {/* Wheel */}
-        {activeTab === "wheel" && (
-          <div className="card">
-            <Wheel />
           </div>
         )}
 
         {/* Store */}
         {activeTab === "store" && (
-          <div className="card">
-            <h2>🛒 Power-Up Store</h2>
-
-            <button
-              onClick={handleRollStore}
-              disabled={rolling || powerUps.length === 0}
-              className="roll-btn"
-            >
-              {rolling ? "Rolling..." : "🎲 Roll Store"}
-            </button>
+          <div className={styles.card}>
+            <img className={styles.shopTitle} src={ShopTitle} alt="shop" />
+            <div>
+              <button
+                onClick={handleRollStore}
+                disabled={rolling || powerUps.length === 0}
+                className={styles.rollBtn}
+              >
+                {rolling ? "Rolling..." : "🎲 Roll Store"}
+              </button>
+            </div>
 
             {currentStore.length === 0 ? (
               <p>No power-ups available. Roll the store!</p>
             ) : (
-              <div className="store-grid">
+              <div className={styles.storeGrid}>
                 {currentStore.map((p) => (
-                  <div key={p.id} className="powerup-card">
+                  <div key={p.id} className={styles.powerupCard}>
                     <img
                       src={powerUpImages[p.id] || p.image || ""}
                       alt={p.name}
-                      className="powerup-img"
+                      className={styles.powerupImg}
                       onError={(e) => (e.currentTarget.style.display = "none")}
                     />
                     <h3>{p.title}</h3>
-                    <p>{p.price} pts</p>
+                    <h4>{p.price} pts</h4>
                     <p>{p.description}</p>
                   </div>
                 ))}

@@ -9,22 +9,9 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import "../styles/PlayerAchievements.css";
-import Ach1 from "../assets/achievements/Ach1.png";
-import Ach2 from "../assets/achievements/Asset 2@300xewdrsfwe.png";
-import Ach3 from "../assets/achievements/Asset 3@300xewdrsfwe.png";
-import Ach4 from "../assets/achievements/Asset 4@300xewdrsfwe.png";
-import Ach5 from "../assets/achievements/Asset 5@300xewdrsfwe.png";
-import Ach6 from "../assets/achievements/Asset 6@300xewdrsfwe.png";
-import Ach7 from "../assets/achievements/Asset 7@300xewdrsfwe.png";
-import Ach8 from "../assets/achievements/Asset 8@300xewdrsfwe.png";
-import Ach9 from "../assets/achievements/Asset 9@300xewdrsfwe.png";
 import Ach10 from "../assets/achievements/Asset 10@300xewdrsfwe.png";
-import Ach11 from "../assets/achievements/Asset 11@300xewdrsfwe.png";
 import Ach12 from "../assets/achievements/Asset 12@300xewdrsfwe.png";
-import Ach13 from "../assets/achievements/Asset 13@300xewdrsfwe.png";
-import Ach14 from "../assets/achievements/Asset 14@300xewdrsfwe.png";
 import Ach15 from "../assets/achievements/Asset 15@300xewdrsfwe.png";
-import Ach16 from "../assets/achievements/Asset 16@300xewdrsfwe.png";
 import Ach17 from "../assets/achievements/Asset 17@300xewdrsfwe.png";
 import Ach18 from "../assets/achievements/Asset 18@300xewdrsfwe.png";
 import Ach19 from "../assets/achievements/Asset 19@300xewdrsfwe.png";
@@ -66,32 +53,13 @@ import Ach54 from "../assets/achievements/Asset 54@300xewdrsfwe.png";
 import Ach55 from "../assets/achievements/Asset 55@300xewdrsfwe.png";
 import Ach56 from "../assets/achievements/Asset 56@300xewdrsfwe.png";
 import Ach57 from "../assets/achievements/Asset 57@300xewdrsfwe.png";
-import Ach58 from "../assets/achievements/Asset 58@300xewdrsfwe.png";
-import Ach59 from "../assets/achievements/Asset 59@300xewdrsfwe.png";
 import Ach60 from "../assets/achievements/Asset 60@300xewdrsfwe.png";
-import Ach61 from "../assets/achievements/Asset 61@300xewdrsfwe.png";
-import Ach62 from "../assets/achievements/Asset 62@300xewdrsfwe.png";
-import Ach63 from "../assets/achievements/Asset 63@300xewdrsfwe.png";
 import Title from "../assets/achievements/Asset 65@300xewdrsfwe.png";
-import Ach66 from "../assets/achievements/Asset 66@300xewdrsfwe.png";
 
 const imageMap = {
-  Ach1,
-  Ach2,
-  Ach3,
-  Ach4,
-  Ach5,
-  Ach6,
-  Ach7,
-  Ach8,
-  Ach9,
   Ach10,
-  Ach11,
   Ach12,
-  Ach13,
-  Ach14,
   Ach15,
-  Ach16,
   Ach17,
   Ach18,
   Ach19,
@@ -133,13 +101,7 @@ const imageMap = {
   Ach55,
   Ach56,
   Ach57,
-  Ach58,
-  Ach59,
   Ach60,
-  Ach61,
-  Ach62,
-  Ach63,
-  Ach66,
   Title,
 };
 
@@ -148,6 +110,17 @@ export default function PlayerAchievements({ playerId }) {
   const [earned, setEarned] = useState([]);
   const [currentGame, setCurrentGame] = useState("");
   const [selectedAchievement, setSelectedAchievement] = useState(null);
+  const [activeTab, setActiveTab] = useState("available");
+  const [allAchievements, setAllAchievements] = useState([]);
+
+  useEffect(() => {
+    const fetchAchievements = async () => {
+      const snap = await getDocs(collection(db, "achievements"));
+      const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      setAllAchievements(list);
+    };
+    fetchAchievements();
+  }, []);
 
   // Load current game
   useEffect(() => {
@@ -228,113 +201,160 @@ export default function PlayerAchievements({ playerId }) {
 
   return (
     <div className="achievements-tab">
-      <h2>🏆 Achievements for {currentGame || "..."}</h2>
-
-      {/* === CURRENT GAME ACHIEVEMENTS === */}
-      <div className="achievements-grid">
-        {gameAchievements.length > 0 ? (
-          gameAchievements.map((a) => {
-            const isEarned = earned.includes(a.id);
-            const isSelected = selectedAchievement === a.id;
-
-            return (
-              <div
-                key={a.id}
-                className={`achievement-card ${isEarned ? "earned" : ""}`}
-                onClick={() =>
-                  isEarned
-                    ? null
-                    : setSelectedAchievement(isSelected ? null : a.id)
-                }
-              >
-                <img
-                  src={imageMap[a.image] || a.image}
-                  alt={a.title}
-                  className="achievement-img"
-                  onError={(e) => (e.currentTarget.style.display = "none")}
-                />
-
-                {/* Overlay appears when selected */}
-                {isSelected && !isEarned && (
-                  <div className="achievement-overlay">
-                    <button
-                      className="claim-btn-overlay"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        claimAchievement(a);
-                      }}
-                    >
-                      Claim
-                    </button>
-                  </div>
-                )}
-
-                {/* Overlay for claimed achievements */}
-                {isEarned && (
-                  <div className="achievement-overlay earned">
-                    <span>✅ Claimed</span>
-                  </div>
-                )}
-              </div>
-            );
-          })
-        ) : (
-          <p>No achievements available for this game.</p>
-        )}
+      {/* Tabs */}
+      <div className="tabs">
+        <button
+          className={`tab-button ${activeTab === "available" ? "active" : ""}`}
+          onClick={() => setActiveTab("available")}
+        >
+          Available
+        </button>
+        <button
+          className={`tab-button ${activeTab === "earned" ? "active" : ""}`}
+          onClick={() => setActiveTab("earned")}
+        >
+          Earned
+        </button>
       </div>
 
-      {/* === ALWAYS-VISIBLE CATEGORIES === */}
-      {categoryAchievements.map((cat) =>
-        cat.items.length > 0 ? (
-          <div key={cat.name} className="achievement-category-section">
-            <h3>{cat.name}</h3>
-            <div className="achievements-grid">
-              {cat.items.map((a) => {
-                const isEarned = earned.includes(a.id);
-                const isSelected = selectedAchievement === a.id;
-
-                return (
-                  <div
-                    key={a.id}
-                    className={`achievement-card ${isEarned ? "earned" : ""}`}
-                    onClick={() =>
-                      isEarned
-                        ? null
-                        : setSelectedAchievement(isSelected ? null : a.id)
-                    }
-                  >
-                    <img
-                      src={imageMap[a.image] || a.image}
-                      alt={a.title}
-                      className="achievement-img"
-                      onError={(e) => (e.currentTarget.style.display = "none")}
-                    />
-
-                    {isSelected && !isEarned && (
-                      <div className="achievement-overlay">
-                        <button
-                          className="claim-btn-overlay"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            claimAchievement(a);
-                          }}
-                        >
-                          Claim
-                        </button>
-                      </div>
-                    )}
-
-                    {isEarned && (
-                      <div className="achievement-overlay earned">
-                        <span>✅ Claimed</span>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+      {/* === AVAILABLE TAB === */}
+      {activeTab === "available" && (
+        <>
+          {/* CURRENT GAME ACHIEVEMENTS */}
+          <h2>{currentGame || "..."}</h2>
+          <div className="achievements-grid">
+            {gameAchievements.length > 0 ? (
+              gameAchievements
+                .filter((a) => !earned.includes(a.id))
+                .map((a) => {
+                  const isSelected = selectedAchievement === a.id;
+                  return (
+                    <div
+                      key={a.id}
+                      className="achievement-card"
+                      onClick={() =>
+                        setSelectedAchievement(isSelected ? null : a.id)
+                      }
+                    >
+                      <img
+                        src={imageMap[a.image] || a.image}
+                        alt={a.title}
+                        className="achievement-img"
+                        onError={(e) =>
+                          (e.currentTarget.style.display = "none")
+                        }
+                      />
+                      {isSelected && (
+                        <div className="achievement-overlay">
+                          <button
+                            className="claim-btn-overlay"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              claimAchievement(a);
+                            }}
+                          >
+                            Claim
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+            ) : (
+              <p>No achievements available for this game.</p>
+            )}
           </div>
-        ) : null
+
+          {/* OTHER CATEGORY ACHIEVEMENTS */}
+          {categoryAchievements.map((cat) => {
+            const unearned = cat.items.filter((a) => !earned.includes(a.id));
+            return unearned.length > 0 ? (
+              <div key={cat.name} className="achievement-category-section">
+                <h3>{cat.name}</h3>
+                <div className="achievements-grid">
+                  {unearned.map((a) => {
+                    const isSelected = selectedAchievement === a.id;
+                    return (
+                      <div
+                        key={a.id}
+                        className="achievement-card"
+                        onClick={() =>
+                          setSelectedAchievement(isSelected ? null : a.id)
+                        }
+                      >
+                        <img
+                          src={imageMap[a.image] || a.image}
+                          alt={a.title}
+                          className="achievement-img"
+                          onError={(e) =>
+                            (e.currentTarget.style.display = "none")
+                          }
+                        />
+                        {isSelected && (
+                          <div className="achievement-overlay">
+                            <button
+                              className="claim-btn-overlay"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                claimAchievement(a);
+                              }}
+                            >
+                              Claim
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null;
+          })}
+        </>
+      )}
+
+      {/* === EARNED TAB === */}
+      {activeTab === "earned" && (
+        <>
+          <h2 className="section-title">All Earned Achievements</h2>
+          <div className="achievements-grid">
+            {Object.entries(
+              allAchievements
+                .filter((a) => earned.includes(a.id))
+                .reduce((acc, achievement) => {
+                  const category = achievement.category || "Uncategorized";
+                  if (!acc[category]) acc[category] = [];
+                  acc[category].push(achievement);
+                  return acc;
+                }, {})
+            ).map(([category, achievements]) => (
+              <div key={category} className="achievement-category">
+                <h3 className="category-title">{category}</h3>
+                <div className="category-achievements">
+                  {achievements.map((a) => (
+                    <div key={a.id} className="achievement-card earned">
+                      <img
+                        src={imageMap[a.image] || a.image}
+                        alt={a.title}
+                        className="achievement-img"
+                        onError={(e) =>
+                          (e.currentTarget.style.display = "none")
+                        }
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {allAchievements.filter((a) => earned.includes(a.id)).length ===
+              0 && (
+              <p className="no-earned-msg">
+                You haven’t earned any achievements yet.
+              </p>
+            )}
+          </div>
+        </>
       )}
     </div>
   );

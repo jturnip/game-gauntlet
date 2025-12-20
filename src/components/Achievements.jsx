@@ -1,21 +1,8 @@
 import React, { useState } from "react";
 import "../styles/Achievements.css";
-import Ach1 from "../assets/achievements/Ach1.png";
-import Ach2 from "../assets/achievements/Asset 2@300xewdrsfwe.png";
-import Ach3 from "../assets/achievements/Asset 3@300xewdrsfwe.png";
-import Ach4 from "../assets/achievements/Asset 4@300xewdrsfwe.png";
-import Ach5 from "../assets/achievements/Asset 5@300xewdrsfwe.png";
-import Ach6 from "../assets/achievements/Asset 6@300xewdrsfwe.png";
-import Ach7 from "../assets/achievements/Asset 7@300xewdrsfwe.png";
-import Ach8 from "../assets/achievements/Asset 8@300xewdrsfwe.png";
-import Ach9 from "../assets/achievements/Asset 9@300xewdrsfwe.png";
 import Ach10 from "../assets/achievements/Asset 10@300xewdrsfwe.png";
-import Ach11 from "../assets/achievements/Asset 11@300xewdrsfwe.png";
 import Ach12 from "../assets/achievements/Asset 12@300xewdrsfwe.png";
-import Ach13 from "../assets/achievements/Asset 13@300xewdrsfwe.png";
-import Ach14 from "../assets/achievements/Asset 14@300xewdrsfwe.png";
 import Ach15 from "../assets/achievements/Asset 15@300xewdrsfwe.png";
-import Ach16 from "../assets/achievements/Asset 16@300xewdrsfwe.png";
 import Ach17 from "../assets/achievements/Asset 17@300xewdrsfwe.png";
 import Ach18 from "../assets/achievements/Asset 18@300xewdrsfwe.png";
 import Ach19 from "../assets/achievements/Asset 19@300xewdrsfwe.png";
@@ -57,477 +44,340 @@ import Ach54 from "../assets/achievements/Asset 54@300xewdrsfwe.png";
 import Ach55 from "../assets/achievements/Asset 55@300xewdrsfwe.png";
 import Ach56 from "../assets/achievements/Asset 56@300xewdrsfwe.png";
 import Ach57 from "../assets/achievements/Asset 57@300xewdrsfwe.png";
-import Ach58 from "../assets/achievements/Asset 58@300xewdrsfwe.png";
-import Ach59 from "../assets/achievements/Asset 59@300xewdrsfwe.png";
 import Ach60 from "../assets/achievements/Asset 60@300xewdrsfwe.png";
-import Ach61 from "../assets/achievements/Asset 61@300xewdrsfwe.png";
-import Ach62 from "../assets/achievements/Asset 62@300xewdrsfwe.png";
-import Ach63 from "../assets/achievements/Asset 63@300xewdrsfwe.png";
 import Title from "../assets/achievements/Asset 65@300xewdrsfwe.png";
-import Ach66 from "../assets/achievements/Asset 66@300xewdrsfwe.png";
 
 // Example achievements — replace image paths with your PNGs
 const achievementsData = [
-  // Pong
+  
+  // Quiplash 'Chieves
   {
-    id: "island_in_the_sun",
-    title: "Island In the Sun",
-    category: "Pong",
+    id: "oops_still_won",
+    title: "Oops... Still Won",
+    category: "Quiplash",
     points: 2,
-    image: Ach59,
+    image: Ach31,
   },
   {
-    id: "finish_the_job",
-    title: "Finish the Job",
-    category: "Pong",
+    id: "jinx",
+    title: "Jinx!",
+    category: "Quiplash",
     points: 2,
-    image: Ach60,
+    image: Ach32,
   },
   {
-    id: "boing",
-    title: "Boing!",
-    category: "Pong",
+    id: "silent_but_deadly",
+    title: "Silent But Deadly",
+    category: "Quiplash",
+    points: 2,
+    image: Ach33,
+  },
+  {
+    id: "impressively_not_funny",
+    title: "Impressively Not Funny",
+    category: "Quiplash",
     points: 3,
-    image: Ach61,
+    image: Ach34,
   },
-  {
-    id: "were_so_in_sync",
-    title: "We're So In Sync",
-    category: "Pong",
-    points: 1,
-    image: Ach62,
-  },
-  {
-    id: "hes_on_fire",
-    title: "He's On Fire!",
-    category: "Pong",
-    points: 2,
-    image: Ach63,
-  },
-  // Cornhole
-  {
-    id: "stalemate",
-    title: "Stalemate",
-    category: "Cornhole",
+    {
+    id: "secret_achievement1",
+    title: "Secret Achievement",
+    category: "Quiplash",
     points: 2,
     image: Ach50,
   },
+ // Spoons 
+
   {
-    id: "self_sabatoge",
-    title: "Self-Sabatoge",
-    category: "Cornhole",
+    id: "last_but_not_least",
+    title: "Last But Not Least",
+    category: "Spoons",
+    points: 2,
+    image: Ach35,
+  },
+{
+    id: "early_bird_gets_the_spoon",
+    title: "Early Bird Gets The Spoon",
+    category: "Spoons",
     points: 1,
-    image: Ach51,
+    image: Ach36,
   },
   {
-    id: "get_out",
-    title: "GET OUT!!!",
-    category: "Cornhole",
+    id: "sucking",
+    title: "Sucking",
+    category: "Spoons",
     points: 1,
+    image: Ach37,
+  },
+  {
+    id: "reliable_peers",
+    title: "Reliable Peers",
+    category: "Spoons",
+    points: 2,
+    image: Ach38,
+  },
+    {
+    id: "secret_achievement",
+    title: "Secret Achievement",
+    category: "Spoons",
+    points: 2,
     image: Ach52,
   },
-  {
-    id: "nothing_but_hole",
-    title: "Nothing But Hole",
-    category: "Cornhole",
+
+// Wii Sports Basketball
+
+ {
+    id: "nothin_but_air",
+    title: "Nothin' But Air",
+    category: "Wii Sports Basketball",
     points: 4,
-    image: Ach53,
+    image: Ach39,
   },
-  {
-    id: "epic_trickshotz",
-    title: "Epic Trickshotz",
-    category: "Cornhole",
-    points: 3,
-    image: Ach54,
-  },
-  // Stick Fight
-  {
-    id: "pacifist_victory",
-    title: "Pacifist Victory",
-    category: "Stick Fight",
-    points: 3,
-    image: Ach45,
-  },
-  {
-    id: "snake_charmer",
-    title: "Snake Charmer",
-    category: "Stick Fight",
+   {
+    id: "hot_streak",
+    title: "Hot Streak",
+    category: "Wii Sports Basketball",
     points: 1,
-    image: Ach46,
-  },
-  {
-    id: "hat_trick",
-    title: "Hat Trick",
-    category: "Stick Fight",
-    points: 2,
-    image: Ach47,
-  },
-  {
-    id: "melee_combatant",
-    title: "Melee Combatant",
-    category: "Stick Fight",
-    points: 3,
-    image: Ach48,
-  },
-  {
-    id: "weapon_of_choice",
-    title: "Weapon Of Choice",
-    category: "Stick Fight",
-    points: 1,
-    image: Ach49,
-  },
-  // Geoguesser
-  {
-    id: "2000_lightyears_away",
-    title: "2000 Lightyears Away",
-    category: "Geoguesser",
-    points: 2,
     image: Ach40,
   },
-  {
-    id: "one_and_done",
-    title: "One And Done",
-    category: "Geoguesser",
+   {
+    id: "barely_victorious",
+    title: "Barely Victorious",
+    category: "Wii Sports Basketball",
     points: 2,
     image: Ach41,
   },
-  {
-    id: "close_call",
-    title: "Close Call",
-    category: "Geoguesser",
-    points: 1,
+   {
+    id: "undeniably_goated",
+    title: "Undeniably GOATed",
+    category: "Wii Sports Basketball",
+    points: 5,
     image: Ach42,
   },
-  {
-    id: "cartographer",
-    title: "Cartographer",
-    category: "Geoguesser",
-    points: 3,
+    {
+    id: "secret_achievement",
+    title: "Secret Achievement",
+    category: "Wii Sports Basketball",
+    points: 2,
+    image: Ach48,
+  },
+  //Gang Beasts
+   {
+    id: "certified_menace_to_society",
+    title: "Certified Menace to Society",
+    category: "Gang Beasts",
+    points: 2,
     image: Ach43,
   },
-  {
-    id: "pinpoint_accuracy",
-    title: "Pinpoint Accuracy",
-    category: "Geoguesser",
-    points: 5,
+   {
+    id: "no_hands_were_thrown",
+    title: "No Hands Were Thrown",
+    category: "Gang Beasts",
+    points: 3,
     image: Ach44,
   },
-  // Overcooked 2
-  {
-    id: "hot_caliente",
-    title: "Hot Caliente!",
-    category: "Overcooked 2",
+   {
+    id: "mutual_yeet",
+    title: "Mutual Yeet",
+    category: "Gang Beasts",
+    points: 2,
+    image: Ach45,
+  },
+ {
+    id: "nap_and_clap",
+    title: "Nap and Clap",
+    category: "Gang Beasts",
     points: 1,
-    image: Ach17,
+    image: Ach46,
   },
-  {
-    id: "kitchen_catastrophe",
-    title: "Kitchen Catastrophe",
-    category: "Overcooked 2",
+    {
+    id: "secret_achievement",
+    title: "Secret Achievement",
+    category: "Gang Beasts",
     points: 2,
-    image: Ach18,
+    image: Ach49,
   },
-  {
-    id: "perfectly_cooked",
-    title: "Perfectly Cooked",
-    category: "Overcooked 2",
+  //Super Smash Bros
+   {
+    id: "welp_that_was_easy",
+    title: "Welp, That Was Easy!",
+    category: "Super Smash Bros",
     points: 3,
-    image: Ach19,
+    image: Ach47,
   },
-  {
-    id: "three_piece_combo",
-    title: "Three-Piece Combo",
-    category: "Overcooked 2",
-    points: 2,
-    image: Ach20,
-  },
-  {
-    id: "michelin_stars",
-    title: "Michelin Stars",
-    category: "Overcooked 2",
+     {
+    id: "just_a_scratch_coach",
+    title: "Just a Scratch, Coach",
+    category: "Super Smash Bros",
     points: 3,
-    image: Ach21,
+    image: Ach54,
   },
-  // Quiplash 'Chieves
-  {
-    id: "what_are_the_odds",
-    title: "What are the odds?",
-    category: "Quiplash",
+    {
+    id: "certified_spectator",
+    title: "Certified Spectator",
+    category: "Super Smash Bros",
     points: 2,
-    image: Ach1,
+    image: Ach55,
   },
-  {
-    id: "one_hit_wonder",
-    title: "One Hit Wonder",
-    category: "Quiplash",
-    points: 2,
-    image: Ach12,
-  },
-  {
-    id: "silent_majority",
-    title: "Silent Majority",
-    category: "Quiplash",
-    points: 4,
-    image: Ach13,
-  },
-  {
-    id: "safety_dance",
-    title: "Safety Dance",
-    category: "Quiplash",
-    points: 3,
-    image: Ach14,
-  },
-  {
-    id: "its_in_the_name",
-    title: "It's In The Name",
-    category: "Quiplash",
-    points: 2,
-    image: Ach15,
-  },
-  {
-    id: "sweet_revenge",
-    title: "Sweet Revenge",
-    category: "Quiplash",
+    {
+    id: "so_close_yet_so_far",
+    title: "So Close, Yet So Far...",
+    category: "Super Smash Bros",
     points: 1,
-    image: Ach16,
+    image: Ach56,
   },
-  // Zonk 'Chieves
-  {
-    id: "snake_eye_savant",
-    title: "Snake Eye Savant",
-    category: "Zonk",
-    points: 1,
-    image: Ach2,
-  },
-  {
-    id: "a_tough_start",
-    title: "A Tough Start",
-    category: "Zonk",
-    points: 1,
-    image: Ach3,
-  },
-  {
-    id: "riskit_for_the_biskit",
-    title: "Riskit For The Biskit",
-    category: "Zonk",
-    points: 3,
-    image: Ach4,
-  },
-  {
-    id: "holy_roller",
-    title: "Holy Roller",
-    category: "Zonk",
-    points: 5,
-    image: Ach5,
-  },
-  {
-    id: "what_a_guy",
-    title: "What A Guy",
-    category: "Zonk",
+      {
+    id: "touch_grass",
+    title: "Touch Grass",
+    category: "Super Smash Bros",
     points: 2,
-    image: Ach6,
+    image: Ach57,
+  },
+    {
+    id: "secret_achievement",
+    title: "Secret Achievement",
+    category: "Super Smash Bros",
+    points: 2,
+    image: Ach53,
   },
   // Mario Kart
   {
-    id: "photo_finish",
-    title: "Photo Finish",
+    id: "see_ya_nerds",
+    title: "See Ya, Nerds",
     category: "Mario Kart",
     points: 3,
-    image: Ach7,
-  },
-  {
-    id: "american_sniper",
-    title: "American Sniper",
-    category: "Mario Kart",
-    points: 2,
-    image: Ach8,
-  },
-  {
-    id: "blue_shell_insurance",
-    title: "Blue Shell Insurance",
-    category: "Mario Kart",
-    points: 2,
-    image: Ach9,
-  },
-  {
-    id: "not_today",
-    title: "Not Today",
-    category: "Mario Kart",
-    points: 1,
     image: Ach10,
   },
   {
-    id: "backing_up",
-    title: "Backing Up!",
+    id: "beep_beep",
+    title: "Beep Beep!",
     category: "Mario Kart",
     points: 3,
-    image: Ach11,
+    image: Ach12,
+  },
+  {
+    id: "secret_service",
+    title: "Secret Service",
+    category: "Mario Kart",
+    points: 2,
+    image: Ach15,
+  },
+    {
+    id: "thats_pitiful",
+    title: "That's Pitiful!",
+    category: "Mario Kart",
+    points: 3,
+    image: Ach60,
+  },
+    {
+    id: "secret_achievement",
+    title: "Secret Achievement",
+    category: "Mario Kart",
+    points: 2,
+    image: Ach51,
   },
   // General
-  {
-    id: "downward_spiral",
-    title: "Downward Spiral",
-    category: "General",
-    points: 3,
-    image: Ach55,
-  },
   {
     id: "lucky_you",
     title: "Lucky You!",
     category: "General",
     points: 1,
-    image: Ach56,
-  },
-  {
-    id: "rags_to_riches",
-    title: "Rags to Riches",
-    category: "General",
-    points: 2,
-    image: Ach57,
+    image: Ach29,
   },
   {
     id: "duel_master",
     title: "Duel Master",
     category: "General",
     points: 4,
-    image: Ach58,
+    image: Ach30,
   },
   // Power Ups
-  {
-    id: "norberts_bff",
-    title: "Norbert's BFF",
-    category: "Power Ups",
-    points: 3,
-    image: Ach22,
-  },
   {
     id: "big_spender",
     title: "Big Spender",
     category: "Power Ups",
     points: 2,
-    image: Ach23,
+    image: Ach17,
   },
   {
     id: "dill_or_no_dill",
     title: "Dill or No Dill",
     category: "Power Ups",
     points: 1,
-    image: Ach24,
-  },
-  {
-    id: "good_boy",
-    title: "Good Boy!",
-    category: "Power Ups",
-    points: 2,
-    image: Ach25,
+    image: Ach19,
   },
   {
     id: "unfinished_business",
     title: "Unfinished Business",
     category: "Power Ups",
     points: 4,
-    image: Ach26,
+    image: Ach20,
   },
   {
     id: "clutch_foodling",
     title: "Clutch Foodling",
     category: "Power Ups",
     points: 1,
-    image: Ach27,
-  },
-  {
-    id: "item_hoarder",
-    title: "Item Hoarder",
-    category: "Power Ups",
-    points: 2,
-    image: Ach39,
+    image: Ach21,
   },
   {
     id: "explosive_purchase",
     title: "Explosive Purchase",
     category: "Power Ups",
     points: 3,
-    image: Ach66,
+    image: Ach18,
   },
   // Achievement Acheicneicen
-  {
-    id: "triple_dip",
-    title: "Triple Dip",
-    category: "Achievements",
-    points: 4,
-    image: Ach28,
-  },
   {
     id: "variety_is_the_spice",
     title: "Variety is the Spice",
     category: "Achievements",
-    points: 5,
-    image: Ach29,
+    points: 4,
+    image: Ach22,
   },
   {
     id: "achievement_hunter",
     title: "Achievement Hunter",
     category: "Achievements",
     points: 2,
-    image: Ach30,
+    image: Ach23,
   },
   {
     id: "achievement_king",
     title: "Achievement King",
     category: "Achievements",
     points: 3,
-    image: Ach31,
-  },
-  {
-    id: "overachiever",
-    title: "Overachiever",
-    category: "Achievements",
-    points: 3,
-    image: Ach32,
-  },
-  // general
-  {
-    id: "underdog",
-    title: "Underdog",
-    category: "General",
-    points: 3,
-    image: Ach33,
-  },
-  {
-    id: "consistently_mid",
-    title: "Consistently Mid",
-    category: "General",
-    points: 2,
-    image: Ach34,
+    image: Ach24,
   },
   // Special
-  {
-    id: "secret_achievement",
-    title: "Secret Achievement",
-    category: "Special",
-    points: 2,
-    image: Ach35,
-  },
+
   {
     id: "wielder_of_chaos",
     title: "Wielder of Chaos",
     category: "Special",
     points: 2.5,
-    image: Ach36,
+    image: Ach26,
   },
   {
     id: "unlucky_you",
     title: "Unlucky You!",
     category: "Special",
     points: -2,
-    image: Ach37,
+    image: Ach27,
   },
   {
     id: "wheels_favorite",
     title: "Wheels's Favorite",
     category: "Special",
     points: 2,
-    image: Ach38,
+    image: Ach28,
+  },
+    {
+    id: "frick_you",
+    title: "Frick You",
+    category: "Special",
+    points: 3.1,
+    image: Ach25,
   },
 ];
 

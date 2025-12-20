@@ -6,7 +6,7 @@
   justify-content: center;
   min-height: 100vh;
   padding: 2rem 1rem;
-  background-color: #1b003f; /* matches global bg */
+  background-color: #560000; /* matches global bg */
   text-align: center;
 }
 
@@ -45,8 +45,8 @@
   gap: 1rem;
   width: 100%;
   max-width: 350px;
-  background-color: #3f007f;
-  border: 2px solid #7f00ff;
+  background-color: #7f0000;
+  border: 2px solid #ff0000;
   padding: 1.5rem;
   box-shadow: 4px 4px #000;
 }
@@ -54,9 +54,9 @@
 /* Inputs */
 .login-form input,
 .login-form select {
-  background-color: #1b003f;
+  background-color: #3f0000;
   color: #e0e0e0;
-  border: 2px solid #7f00ff;
+  border: 2px solid #ff0000;
   padding: 0.6rem;
   font-family: "Alagard Medium", sans-serif;
   outline: none;
@@ -66,10 +66,10 @@
 
 /* Button */
 .login-form button {
-  background-color: #ff00ff;
-  color: #1b003f;
+  background-color: #ff0000;
+  color: #3f0000;
   padding: 0.6rem;
-  border: 2px solid #7f00ff;
+  border: 2px solid #ff0000;
   font-family: "Alagard Medium", sans-serif;
   text-transform: uppercase;
   cursor: pointer;
@@ -77,7 +77,7 @@
 }
 
 .login-form button:hover {
-  background-color: #7f00ff;
+  background-color: #ff0000;
   color: #e0e0e0;
   transform: scale(1.05);
 }

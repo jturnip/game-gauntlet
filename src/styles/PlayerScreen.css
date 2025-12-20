@@ -1,6 +1,10 @@
 .player-screen {
   padding: 2rem 1rem;
-  background-color: #1b003f;
+  background-image: url("../assets/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
   min-height: 100vh;
   color: #e0e0e0;
   font-family: "Alagard Medium", sans-serif;
@@ -16,10 +20,30 @@
   width: 60px;
   height: 60px;
   margin-right: 1rem;
-  border: 2px solid #ff00ff;
+  border: 2px solid #e00000;
   box-shadow: 2px 2px #000;
+  margin-top: 20px;
 }
 
+/* Tabs */
+.tab-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  background-color: #eee;
+  border-radius: 0.5rem;
+}
+
+.tab.active {
+  background-color: #ddd;
+  font-weight: bold;
+}
 .inventory {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -27,9 +51,62 @@
 }
 
 .inventory-item {
-  background-color: #3f007f;
-  border: 2px solid #7f00ff;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #7f0000;
+  border-radius: 0.5rem;
+  max-width: 400px;
   text-align: center;
-  box-shadow: 3px 3px #000;
+  font-size: 40px;
+}
+
+.player-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.player-avatar {
+  width: 300px;
+  margin-top: 20px;
+}
+
+.player-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #7f0000;
+  padding: 0 20px 0 20px;
+}
+
+.place-image {
+  width: 100px;
+  height: auto;
+}
+
+.player-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
+  margin: 0;
+  padding: 0;
+}
+
+.player-score h3 {
+  font-size: 4rem;
+  color: rgb(0, 0, 0);
+  margin: 0;
+  padding: 0;
+}
+
+.player-logo {
+  max-width: 75%;
+  display: block;
+  margin: 20px auto;
 }
