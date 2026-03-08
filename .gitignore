@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 
 .vercel
+
+
+#scripts
+
+scripts/serviceAccountKey.json
+scripts/*.env

@@ -15,7 +15,7 @@
   max-width: 80%;
   height: auto;
   display: block;
-  margin: 0 auto 2rem auto;
+  margin: 200px auto 2rem auto;
   image-rendering: pixelated; /* enhances pixel look */
   padding-top: 100px;
 }

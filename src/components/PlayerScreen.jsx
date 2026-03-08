@@ -13,15 +13,28 @@ import PlayerPowerUps from "./PlayerPowerUps";
 import Logo from "../assets/main_title.png";
 
 // Import local images
-import BrysonPic from "../assets/avatars/bryson_head.png";
-import ConnerPic from "../assets/avatars/conner_head.png";
-import ElijahPic from "../assets/avatars/elijah_head.png";
-import DrakePic from "../assets/avatars/drake_head.png";
-import NatePic from "../assets/avatars/nate_head.png";
-import LincolnPic from "../assets/avatars/lincoln_head.png";
-import NathanPic from "../assets/avatars/nathan_head.png";
-import BennyPic from "../assets/avatars/benny_head.png";
+import BenPic from "../assets/avatars/Ben_Head.png";
+import ChasePic from "../assets/avatars/Chase_Head.png";
+import CynderPic from "../assets/avatars/Cynder_Head.png";
+import DrakePic from "../assets/avatars/Drake_Head.png";
+import JoshiePic from "../assets/avatars/Joshie_Head.png";
+import JoshuaPic from "../assets/avatars/Joshua_Head.png";
+import JustinPic from "../assets/avatars/Justin_Head.png";
+import KurtPic from "../assets/avatars/Kurt_head.png";
 import AdminPic from "../assets/avatars/admin.jpg";
+
+// Map player IDs to images
+const avatarMap = {
+  ben: BenPic,
+  chase: ChasePic,
+  cynder: CynderPic,
+  drake: DrakePic,
+  joshie: JoshiePic,
+  joshua: JoshuaPic,
+  justin: JustinPic,
+  kurt: KurtPic,
+  admin: AdminPic,
+};
 
 // Import place images
 import FirstPlace from "../assets/places/place-1.png";
@@ -32,19 +45,6 @@ import FifthPlace from "../assets/places/place-5.png";
 import SixthPlace from "../assets/places/place-6.png";
 import SeventhPlace from "../assets/places/place-7.png";
 import EighthPlace from "../assets/places/place-8.png";
-
-// Map player IDs to avatar images
-const avatarMap = {
-  bryson: BrysonPic,
-  conner: ConnerPic,
-  elijah: ElijahPic,
-  drake: DrakePic,
-  nate: NatePic,
-  lincoln: LincolnPic,
-  nathan: NathanPic,
-  benny: BennyPic,
-  admin: AdminPic,
-};
 
 export function PlayerScreen({ playerId }) {
   const [activeTab, setActiveTab] = useState("home");
@@ -104,7 +104,7 @@ export function PlayerScreen({ playerId }) {
     <div className="player-screen">
       <img className="player-logo" src={Logo} alt="logo" />
       <nav className="tab-nav">
-        {["home", "achievements", "powerups"].map((tab) => (
+        {["home", "achievements"].map((tab) => (
           <button
             key={tab}
             className={activeTab === tab ? "tab active" : "tab"}

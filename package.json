@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "canvas": "^3.2.1",
     "firebase": "^12.3.0",
+    "firebase-admin": "^13.6.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "spin-wheel-game": "^1.0.3-alpha.3"

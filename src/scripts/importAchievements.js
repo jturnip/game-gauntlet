@@ -1,88 +1,61 @@
-import React, { useState } from "react";
-import "../styles/Achievements.css";
-import people_pleaser from "../assets/achievements/people_pleaser.png";
-import gg_ez_clapz from "../assets/achievements/gg_ez_clapz.png";
-import homie_stock from "../assets/achievements/homie_stock.png";
-import dishwasher from "../assets/achievements/dishwasher.png"; 
-import rage_baited from "../assets/achievements/rage_baited.png";
-import get_spiked from "../assets/achievements/get_spiked.png";
-import crickets from "../assets/achievements/crickets.png";
-import too_soon_bro from "../assets/achievements/too_soon_bro.png";
-import wordplay_wizard from "../assets/achievements/wordplay_wizard.png";
-import redemption_arc from "../assets/achievements/redemption_arc.png";
-import quiplash from "../assets/achievements/quiplash.png";
-import jinx from "../assets/achievements/jinx.png";
-import booing from "../assets/achievements/booing.png";
-import fake_santa from "../assets/achievements/fake_santa.png";
-import double_drip from "../assets/achievements/double_drip.png";
-import running_joke from "../assets/achievements/running_joke.png";
-import shakespeare from "../assets/achievements/shakespeare.png";
-import picasso from "../assets/achievements/picasso.png";
-import clingy_ex from "../assets/achievements/clingy_ex.png";
-import toxic_ex from "../assets/achievements/toxic_ex.png";
-import peaceful from "../assets/achievements/peaceful.png";
-import gandalf from "../assets/achievements/gandalf.png";
-import gorilla_mode from "../assets/achievements/gorilla_mode.png";
-import same_skin from "../assets/achievements/same_skin.png";
-import gorilla_warfare from "../assets/achievements/gorilla_warfare.png";
-import chicken_dinner from "../assets/achievements/chicken_dinner.png";
-import prophecy from "../assets/achievements/prophecy.png";
-import island from "../assets/achievements/island.png";
-import bounce from "../assets/achievements/bounce.png";
-import rerack from "../assets/achievements/rerack.png";
-import resurrection from "../assets/achievements/resurrection.png";
-import quatro_leches from "../assets/achievements/quatro_leches.png";
-import backpack from "../assets/achievements/backpack.png";
-import carry from "../assets/achievements/carry.png";
-import stalemate from "../assets/achievements/stalemate.png";
-import trickshot from "../assets/achievements/trickshot.png";
-import swish from "../assets/achievements/swish.png";
-import comeback from "../assets/achievements/comeback.png";
-import Title from "../assets/achievements/title.png";
+// importAchievements.js (ES Module version)
+import admin from "firebase-admin";
+import { readFileSync } from "fs";
 
-// Example achievements — replace image paths with your PNGs
-const achievementsData = [
+// Replace with the path to your service account key JSON
+const serviceAccount = JSON.parse(readFileSync("./serviceAccountKey.json"));
+
+// Initialize Firebase Admin
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const db = admin.firestore();
+
+// === Your achievements data ===
+const achievements = [
+
   // --- SMASH ---
   {
     title: "People Pleaser",
     description: "Get the crowd to cheer your name",
     category: "Smash",
-    image: people_pleaser,
+    image: "people_pleaser.png",
     points: 3
   },
   {
     title: "GG EZ Clapz",
     description: "Win with 3 stocks remaining",
     category: "Smash",
-    image: gg_ez_clapz,
+    image: "gg_ez_clapz.png",
     points: 5
   },
   {
     title: "The Homie Stock",
     description: "Give a stock and still win",
     category: "Smash",
-    image: homie_stock,
+    image: "homie_stock.png",
     points: 4
   },
   {
     title: "The Dishwasher",
     description: "Land a 0-to-death combo",
     category: "Smash",
-    image: dishwasher,
+    image: "dishwasher.png",
     points: 5
   },
   {
     title: "Rage Baited",
     description: "Taunt then KO within 5 seconds",
     category: "Smash",
-    image: rage_baited,
+    image: "rage_baited.png",
     points: 5
   },
   {
     title: "Get Spiked",
     description: "Spike an opponent off the map",
     category: "Smash",
-    image: get_spiked,
+    image: "get_spiked.png",
     points: 2
   },
 
@@ -91,42 +64,42 @@ const achievementsData = [
     title: "Crickets",
     description: "Get zero votes on your quip",
     category: "Quiplash",
-    image: crickets,
+    image: "crickets.png",
     points: 3
   },
   {
     title: "Too Soon Bro",
     description: "Win a round with a joke from the trip",
     category: "Quiplash",
-    image: too_soon_bro,
+    image: "too_soon_bro.png",
     points: 5
   },
   {
     title: "Wordplay Wizard",
     description: "Pun wins a round",
     category: "Quiplash",
-    image: wordplay_wizard,
+    image: "wordplay_wizard.png",
     points: 2
   },
   {
     title: "Redemption Arc",
     description: "Come back from last to top 3",
     category: "Quiplash",
-    image: redemption_arc,
+    image: "redemption_arc.png",
     points: 4
   },
   {
     title: "It's In The Name",
     description: "Win a round with a Quiplash",
     category: "Quiplash",
-    image: quiplash,
+    image: "quiplash.png",
     points: 2
   },
   {
     title: "You Owe Me a Coke",
     description: "Jinx with another player",
     category: "Quiplash",
-    image: jinx,
+    image: "jinx.png",
     points: 4
   },
 
@@ -135,42 +108,42 @@ const achievementsData = [
     title: "Why Are You Booing Me",
     description: "Your own designs face off in finals",
     category: "TKO",
-    image: booing,
+    image: "booing.png",
     points: 3
   },
   {
     title: "He's a Fake Santa",
     description: "Copy someone's drawing and it wins a round",
     category: "TKO",
-    image: fake_santa,
+    image: "fake_santa.png",
     points: 4
   },
   {
     title: "Double Drip",
     description: "Win two matchups in a row",
     category: "TKO",
-    image: double_drip,
+    image: "double_drip.png",
     points: 3
   },
   {
     title: "Running Joke",
     description: "Your slogan is used in 3+ rounds",
     category: "TKO",
-    image: running_joke,
+    image: "running_joke.png",
     points: 2
   },
   {
     title: "A Real Shakespeare",
     description: "Most slogans used",
     category: "TKO",
-    image: shakespeare,
+    image: "shakespeare.png",
     points: 3
   },
   {
     title: "Picasso Mode",
     description: "Most drawings used",
     category: "TKO",
-    image: picasso,
+    image: "picasso.png",
     points: 3
   },
 
@@ -179,49 +152,49 @@ const achievementsData = [
     title: "Clingy Ex",
     description: "Hold another player for 10 seconds",
     category: "Party Animals",
-    image: clingy_ex,
+    image: "clingy_ex.png",
     points: 4
   },
   {
     title: "Toxic Ex",
     description: "Grab someone and self-destruct",
     category: "Party Animals",
-    image: toxic_ex,
+    image: "toxic_ex.png",
     points: 3
   },
   {
     title: "Make Love Not War",
     description: "Win a round with 0 KOs",
     category: "Party Animals",
-    image: peaceful,
+    image: "peaceful.png",
     points: 3
   },
   {
     title: "Gandalf Recovery",
     description: "Get thrown off and still win",
     category: "Party Animals",
-    image: gandalf,
+    image: "gandalf.png",
     points: 4
   },
   {
     title: "Gorilla Mode",
     description: "Win as the gorilla",
     category: "Party Animals",
-    image: gorilla_mode,
+    image: "gorilla_mode.png",
     points: 3
   },
   {
     title: "Hey That's Me",
     description: "Use same skin as winner",
     category: "Party Animals",
-    image: same_skin,
+    image: "same_skin.png",
     points: 1
   },
   {
     title: "Gorilla Warfare",
     description: "Win as non-gorilla",
     category: "Party Animals",
-    image: gorilla_warfare,
+    image: "gorilla_warfare.png",
     points: 5
   },
 
@@ -230,42 +203,42 @@ const achievementsData = [
     title: "Chicken Dinner",
     description: "Hit the game winning shot",
     category: "Pong",
-    image: chicken_dinner,
+    image: "chicken_dinner.png",
     points: 3
   },
   {
     title: "The Prophecy",
     description: "Call your next shot correctly",
     category: "Pong",
-    image: prophecy,
+    image: "prophecy.png",
     points: 4
   },
   {
     title: "Island in the Sun",
     description: "Call and hit an island shot",
     category: "Pong",
-    image: island,
+    image: "island.png",
     points: 4
   },
   {
     title: "Boioioioing",
     description: "Hit a bounce shot",
     category: "Pong",
-    image: bounce,
+    image: "bounce.png",
     points: 3
   },
   {
     title: "That's The Way I Like It",
     description: "Call rerack and hit a cup",
     category: "Pong",
-    image: rerack,
+    image: "rerack.png",
     points: 2
   },
   {
     title: "Resurrection Sunday",
     description: "Miss 3 in a row then hit 2 in a row",
     category: "Pong",
-    image: resurrection,
+    image: "resurrection.png",
     points: 5
   },
 
@@ -274,98 +247,65 @@ const achievementsData = [
     title: "Quatro Leches",
     description: "Sink four bags in a row",
     category: "Cornhole",
-    image: quatro_leches,
+    image: "quatro_leches.png",
     points: 5
   },
   {
     title: "Backpack Backpack!",
     description: "Score zero points in a game",
     category: "Cornhole",
-    image: backpack,
+    image: "backpack.png",
     points: 5
   },
   {
     title: "Dora the Explora",
     description: "Score all team points",
     category: "Cornhole",
-    image: carry,
+    image: "carry.png",
     points: 5
   },
   {
     title: "Stalemate",
     description: "Both teams land all four bags",
     category: "Cornhole",
-    image: stalemate,
+    image: "stalemate.png",
     points: 3
   },
   {
     title: "Epic Trickshotz",
     description: "Behind-the-back or under-leg shot",
     category: "Cornhole",
-    image: trickshot,
+    image: "trickshot.png",
     points: 5
   },
   {
     title: "Nothing But Hole",
     description: "Clean swish with no board touch",
     category: "Cornhole",
-    image: swish,
+    image: "swish.png",
     points: 2
   },
   {
     title: "Patriots vs Falcons",
     description: "Win after 7+ deficit",
     category: "Cornhole",
-    image: comeback,
+    image: "comeback.png",
     points: 4
   }
+
 ];
 
-export default function AchievementsTab() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  // List of unique categories
-  const categories = [
-    "All",
-    ...new Set(achievementsData.map((a) => a.category)),
-  ];
-
-  const filtered = achievementsData.filter(
-    (a) => selectedCategory === "All" || a.category === selectedCategory
-  );
-
-  return (
-    <div className="achievements-tab">
-      <img className="achievements-title" src={Title} alt="Achievements" />
-
-      {/* Category Filter */}
-      <div className="achievement-categories">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            className={`category-btn ${
-              selectedCategory === cat ? "active" : ""
-            }`}
-            onClick={() => setSelectedCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      {/* Achievement Grid */}
-      <div className="achievements-grid">
-        {filtered.map((a) => (
-          <div key={a.id} className="achievement-card">
-            <img
-              src={a.image}
-              alt={a.title}
-              className="achievement-img"
-              onError={(e) => (e.currentTarget.style.display = "none")}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+// Function to import achievements
+async function importAchievements() {
+  for (const achievement of achievements) {
+    const { title, ...fields } = achievement; // name is doc ID
+    await db.collection("achievements").doc(title).set(fields);
+    console.log(`Imported achievement: ${title}`);
+  }
+  console.log("All achievements imported!");
 }
+
+// Run the script
+importAchievements().catch((err) => {
+  console.error("Error importing achievements:", err);
+});

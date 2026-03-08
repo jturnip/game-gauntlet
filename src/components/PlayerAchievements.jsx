@@ -9,102 +9,91 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import "../styles/PlayerAchievements.css";
-import Ach10 from "../assets/achievements/Asset 10@300xewdrsfwe.png";
-import Ach12 from "../assets/achievements/Asset 12@300xewdrsfwe.png";
-import Ach15 from "../assets/achievements/Asset 15@300xewdrsfwe.png";
-import Ach17 from "../assets/achievements/Asset 17@300xewdrsfwe.png";
-import Ach18 from "../assets/achievements/Asset 18@300xewdrsfwe.png";
-import Ach19 from "../assets/achievements/Asset 19@300xewdrsfwe.png";
-import Ach20 from "../assets/achievements/Asset 20@300xewdrsfwe.png";
-import Ach21 from "../assets/achievements/Asset 21@300xewdrsfwe.png";
-import Ach22 from "../assets/achievements/Asset 22@300xewdrsfwe.png";
-import Ach23 from "../assets/achievements/Asset 23@300xewdrsfwe.png";
-import Ach24 from "../assets/achievements/Asset 24@300xewdrsfwe.png";
-import Ach25 from "../assets/achievements/Asset 25@300xewdrsfwe.png";
-import Ach26 from "../assets/achievements/Asset 26@300xewdrsfwe.png";
-import Ach27 from "../assets/achievements/Asset 27@300xewdrsfwe.png";
-import Ach28 from "../assets/achievements/Asset 28@300xewdrsfwe.png";
-import Ach29 from "../assets/achievements/Asset 29@300xewdrsfwe.png";
-import Ach30 from "../assets/achievements/Asset 30@300xewdrsfwe.png";
-import Ach31 from "../assets/achievements/Asset 31@300xewdrsfwe.png";
-import Ach32 from "../assets/achievements/Asset 32@300xewdrsfwe.png";
-import Ach33 from "../assets/achievements/Asset 33@300xewdrsfwe.png";
-import Ach34 from "../assets/achievements/Asset 34@300xewdrsfwe.png";
-import Ach35 from "../assets/achievements/Asset 35@300xewdrsfwe.png";
-import Ach36 from "../assets/achievements/Asset 36@300xewdrsfwe.png";
-import Ach37 from "../assets/achievements/Asset 37@300xewdrsfwe.png";
-import Ach38 from "../assets/achievements/Asset 38@300xewdrsfwe.png";
-import Ach39 from "../assets/achievements/Asset 39@300xewdrsfwe.png";
-import Ach40 from "../assets/achievements/Asset 40@300xewdrsfwe.png";
-import Ach41 from "../assets/achievements/Asset 41@300xewdrsfwe.png";
-import Ach42 from "../assets/achievements/Asset 42@300xewdrsfwe.png";
-import Ach43 from "../assets/achievements/Asset 43@300xewdrsfwe.png";
-import Ach44 from "../assets/achievements/Asset 44@300xewdrsfwe.png";
-import Ach45 from "../assets/achievements/Asset 45@300xewdrsfwe.png";
-import Ach46 from "../assets/achievements/Asset 46@300xewdrsfwe.png";
-import Ach47 from "../assets/achievements/Asset 47@300xewdrsfwe.png";
-import Ach48 from "../assets/achievements/Asset 48@300xewdrsfwe.png";
-import Ach49 from "../assets/achievements/Asset 49@300xewdrsfwe.png";
-import Ach50 from "../assets/achievements/Asset 50@300xewdrsfwe.png";
-import Ach51 from "../assets/achievements/Asset 51@300xewdrsfwe.png";
-import Ach52 from "../assets/achievements/Asset 52@300xewdrsfwe.png";
-import Ach53 from "../assets/achievements/Asset 53@300xewdrsfwe.png";
-import Ach54 from "../assets/achievements/Asset 54@300xewdrsfwe.png";
-import Ach55 from "../assets/achievements/Asset 55@300xewdrsfwe.png";
-import Ach56 from "../assets/achievements/Asset 56@300xewdrsfwe.png";
-import Ach57 from "../assets/achievements/Asset 57@300xewdrsfwe.png";
-import Ach60 from "../assets/achievements/Asset 60@300xewdrsfwe.png";
-import Title from "../assets/achievements/Asset 65@300xewdrsfwe.png";
+// Import achievement images
+import people_pleaser from "../assets/achievements/people_pleaser.png";
+import gg_ez_clapz from "../assets/achievements/gg_ez_clapz.png";
+import homie_stock from "../assets/achievements/homie_stock.png";
+import dishwasher from "../assets/achievements/dishwasher.png"; 
+import rage_baited from "../assets/achievements/rage_baited.png";
+import get_spiked from "../assets/achievements/get_spiked.png";
+import crickets from "../assets/achievements/crickets.png";
+import too_soon_bro from "../assets/achievements/too_soon_bro.png";
+import wordplay_wizard from "../assets/achievements/wordplay_wizard.png";
+import redemption_arc from "../assets/achievements/redemption_arc.png";
+import quiplash from "../assets/achievements/quiplash.png";
+import jinx from "../assets/achievements/jinx.png";
+import booing from "../assets/achievements/booing.png";
+import fake_santa from "../assets/achievements/fake_santa.png";
+import double_drip from "../assets/achievements/double_drip.png";
+import running_joke from "../assets/achievements/running_joke.png";
+import shakespeare from "../assets/achievements/shakespeare.png";
+import picasso from "../assets/achievements/picasso.png";
+import clingy_ex from "../assets/achievements/clingy_ex.png";
+import toxic_ex from "../assets/achievements/toxic_ex.png";
+import peaceful from "../assets/achievements/peaceful.png";
+import gandalf from "../assets/achievements/gandalf.png";
+import gorilla_mode from "../assets/achievements/gorilla_mode.png";
+import same_skin from "../assets/achievements/same_skin.png";
+import gorilla_warfare from "../assets/achievements/gorilla_warfare.png";
+import chicken_dinner from "../assets/achievements/chicken_dinner.png";
+import prophecy from "../assets/achievements/prophecy.png";
+import island from "../assets/achievements/island.png";
+import bounce from "../assets/achievements/bounce.png";
+import rerack from "../assets/achievements/rerack.png";
+import resurrection from "../assets/achievements/resurrection.png";
+import quatro_leches from "../assets/achievements/quatro_leches.png";
+import backpack from "../assets/achievements/backpack.png";
+import carry from "../assets/achievements/carry.png";
+import stalemate from "../assets/achievements/stalemate.png";
+import trickshot from "../assets/achievements/trickshot.png";
+import swish from "../assets/achievements/swish.png";
+import comeback from "../assets/achievements/comeback.png";
+import Title from "../assets/achievements/title.png";
+
 
 const imageMap = {
-  Ach10,
-  Ach12,
-  Ach15,
-  Ach17,
-  Ach18,
-  Ach19,
-  Ach20,
-  Ach21,
-  Ach22,
-  Ach23,
-  Ach24,
-  Ach25,
-  Ach26,
-  Ach27,
-  Ach28,
-  Ach29,
-  Ach30,
-  Ach31,
-  Ach32,
-  Ach33,
-  Ach34,
-  Ach35,
-  Ach36,
-  Ach37,
-  Ach38,
-  Ach39,
-  Ach40,
-  Ach41,
-  Ach42,
-  Ach43,
-  Ach44,
-  Ach45,
-  Ach46,
-  Ach47,
-  Ach48,
-  Ach49,
-  Ach50,
-  Ach51,
-  Ach52,
-  Ach53,
-  Ach54,
-  Ach55,
-  Ach56,
-  Ach57,
-  Ach60,
-  Title,
+  people_pleaser,
+  gg_ez_clapz,
+  homie_stock,
+  dishwasher,
+  rage_baited,
+  get_spiked,
+  crickets,
+  too_soon_bro,
+  wordplay_wizard,
+  redemption_arc,
+  quiplash,
+  jinx,
+  booing,
+  fake_santa,
+  double_drip,
+  running_joke,
+  shakespeare,
+  picasso,
+  clingy_ex,
+  toxic_ex,
+  peaceful,
+  gandalf,
+  gorilla_mode,
+  same_skin,
+  gorilla_warfare,
+  chicken_dinner,
+  prophecy,
+  island,
+  bounce,
+  rerack,
+  resurrection,
+  quatro_leches,
+  backpack,
+  carry,
+  stalemate,
+  trickshot,
+  swish,
+  comeback,
+  Title
 };
 
+ 
 export default function PlayerAchievements({ playerId }) {
   const [achievements, setAchievements] = useState([]);
   const [earned, setEarned] = useState([]);
@@ -237,7 +226,7 @@ export default function PlayerAchievements({ playerId }) {
                       }
                     >
                       <img
-                        src={imageMap[a.image] || a.image}
+                        src={imageMap[a.image.replace(".png","")] || a.image}
                         alt={a.title}
                         className="achievement-img"
                         onError={(e) =>
@@ -283,7 +272,7 @@ export default function PlayerAchievements({ playerId }) {
                         }
                       >
                         <img
-                          src={imageMap[a.image] || a.image}
+                          src={imageMap[a.image.replace(".png","")] || a.image}
                           alt={a.title}
                           className="achievement-img"
                           onError={(e) =>
@@ -334,7 +323,7 @@ export default function PlayerAchievements({ playerId }) {
                   {achievements.map((a) => (
                     <div key={a.id} className="achievement-card earned">
                       <img
-                        src={imageMap[a.image] || a.image}
+                        src={imageMap[a.image.replace(".png","")] || a.image}
                         alt={a.title}
                         className="achievement-img"
                         onError={(e) =>

@@ -7,26 +7,26 @@ import desktopLogo from "../assets/tusmtm_logo.png";
 import mobileLogo from "../assets/tusmtm_logo.png";
 
 // Import local images
-import BrysonPic from "../assets/avatars/bryson_head.png";
-import ConnerPic from "../assets/avatars/conner_head.png";
-import ElijahPic from "../assets/avatars/elijah_head.png";
-import DrakePic from "../assets/avatars/drake_head.png";
-import NatePic from "../assets/avatars/nate_head.png";
-import LincolnPic from "../assets/avatars/lincoln_head.png";
-import NathanPic from "../assets/avatars/nathan_head.png";
-import BennyPic from "../assets/avatars/benny_head.png";
+import BenPic from "../assets/avatars/Ben_Head.png";
+import ChasePic from "../assets/avatars/Chase_Head.png";
+import CynderPic from "../assets/avatars/Cynder_Head.png";
+import DrakePic from "../assets/avatars/Drake_Head.png";
+import JoshiePic from "../assets/avatars/Joshie_Head.png";
+import JoshuaPic from "../assets/avatars/Joshua_Head.png";
+import JustinPic from "../assets/avatars/Justin_Head.png";
+import KurtPic from "../assets/avatars/Kurt_head.png";
 import AdminPic from "../assets/avatars/admin.jpg";
 
 // Map player IDs to images
 const avatarMap = {
-  bryson: BrysonPic,
-  conner: ConnerPic,
-  elijah: ElijahPic,
+  ben: BenPic,
+  chase: ChasePic,
+  cynder: CynderPic,
   drake: DrakePic,
-  nate: NatePic,
-  lincoln: LincolnPic,
-  nathan: NathanPic,
-  benny: BennyPic,
+  joshie: JoshiePic,
+  joshua: JoshuaPic,
+  justin: JustinPic,
+  kurt: KurtPic,
   admin: AdminPic,
 };
 

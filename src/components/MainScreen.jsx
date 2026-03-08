@@ -22,16 +22,20 @@ import MarioKartIcon from "../assets/games/mario_kart.png";
 import WiiSportsBasketballIcon from "../assets/games/wii_sports_basketball.png";
 import SpoonsIcon from "../assets/games/spoons.png";
 import QuiplashIcon from "../assets/games/quiplash.png";
+import TKOIcon from "../assets/games/TKO.jpg";
+import PongIcon from "../assets/games/pong.png";
+import CornholeIcon from "../assets/games/cornhole.png";
+import PartyAnimalsIcon from "../assets/games/party_animals.png";
 
 
 // Map game names to icons
 const gameIcons = {
-  SuperSmashBros: SuperSmashBrosIcon,
-  GangBeasts: GangBeastsIcon,
-  MarioKart: MarioKartIcon,
-  Basketball: WiiSportsBasketballIcon,
-  Spoons: SpoonsIcon,
+  Smash: SuperSmashBrosIcon,
   Quiplash: QuiplashIcon,
+  TKO: TKOIcon,
+  Pong: PongIcon,
+  Cornhole: CornholeIcon,
+  "Party Animals": PartyAnimalsIcon
 };
 
 import GameGauntletLogo from "../assets/tusmtm_logo.png";
@@ -101,26 +105,27 @@ const powerUpImages = {
   the_wheel_of_wheels,
 };
 
-// Player avatars
-import BrysonPic from "../assets/avatars/bryson_head.png";
-import ConnerPic from "../assets/avatars/conner_head.png";
-import ElijahPic from "../assets/avatars/elijah_head.png";
-import DrakePic from "../assets/avatars/drake_head.png";
-import NatePic from "../assets/avatars/nate_head.png";
-import LincolnPic from "../assets/avatars/lincoln_head.png";
-import NathanPic from "../assets/avatars/nathan_head.png";
-import BennyPic from "../assets/avatars/benny_head.png";
+// Import local images
+import BenPic from "../assets/avatars/Ben_Head.png";
+import ChasePic from "../assets/avatars/Chase_Head.png";
+import CynderPic from "../assets/avatars/Cynder_Head.png";
+import DrakePic from "../assets/avatars/Drake_Head.png";
+import JoshiePic from "../assets/avatars/Joshie_Head.png";
+import JoshuaPic from "../assets/avatars/Joshua_Head.png";
+import JustinPic from "../assets/avatars/Justin_Head.png";
+import KurtPic from "../assets/avatars/Kurt_head.png";
 import AdminPic from "../assets/avatars/admin.jpg";
 
+// Map player IDs to images
 const avatarMap = {
-  bryson: BrysonPic,
-  conner: ConnerPic,
-  elijah: ElijahPic,
+  ben: BenPic,
+  chase: ChasePic,
+  cynder: CynderPic,
   drake: DrakePic,
-  nate: NatePic,
-  lincoln: LincolnPic,
-  nathan: NathanPic,
-  benny: BennyPic,
+  joshie: JoshiePic,
+  joshua: JoshuaPic,
+  justin: JustinPic,
+  kurt: KurtPic,
   admin: AdminPic,
 };
 
@@ -183,12 +188,12 @@ export function MainScreen() {
 
   //points awarded for games
   const gamePoints = {
-    SuperSmashBros: { 1: 10, 2: 6, 3: 4 },
-    GangBeasts: { 1: 10, 2: 6, 3: 4 },
-    WiiSportsBasketball: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
-    Quiplash: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
-    Spoons: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
-    MarioKart: { 1: 10, 2: 6, 3: 4, 4: 2 }
+    Smash: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
+    "Party Animals": { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
+    Pong: { 1: 12, 2: 9, 3: 7, 4: 6, 5: 4, 6: 3, 7: 2, 8: 1 },
+    Quiplash: { 1: 10, 2: 6, 3: 4, 4: 2 },
+    Cornhole: { 1: 10, 2: 6, 3: 4, 4: 2 },
+    TKO: { 1: 4, 2: 3, 3: 2, 4: 1 }
   };
 
   const [results, setResults] = useState({}); // stores player placements
@@ -532,7 +537,7 @@ export function MainScreen() {
     <div className={`${styles.container} ${styles.mainScreen}`}>
       {/* Tabs */}
       <nav className={styles.tabNav}>
-        {["admin", "leaderboard", "store", "achievements"].map((tab) => (
+        {["admin", "leaderboard",  "achievements"].map((tab) => (
           <button
             key={tab}
             className={
@@ -560,12 +565,12 @@ export function MainScreen() {
                 onChange={(e) => updateCurrentGame(e.target.value)}
               >
                 <option value="">-- Select Game --</option>
-                <option value="SuperSmashBros">Super Smash Bros</option>
-                <option value="GangBeasts">Gang Beasts</option>
-                <option value="Basketball">Wii Sports Basketball</option>
+                <option value="Smash">Super Smash Bros</option>
                 <option value="Quiplash">Quiplash</option>
-                <option value="Spoons">Spoons</option>
-                <option value="MarioKart">Mario Kart</option>
+                <option value="TKO">TKO</option>
+                <option value="Party Animals">Party Animals</option>
+                <option value="Pong">Pong</option>
+                <option value="Cornhole">Cornhole</option>
               </select>
             </div>
 
@@ -774,7 +779,7 @@ export function MainScreen() {
           </div>
         )}
 
-        {/* Store */}
+       {/* Store
         {activeTab === "store" && (
           <div className={styles.card}>
             <img className={styles.shopTitle} src={ShopTitle} alt="shop" />
@@ -809,7 +814,7 @@ export function MainScreen() {
             )}
           </div>
         )}
-
+S
         {/* Achievements */}
         {activeTab === "achievements" && (
           <div>
